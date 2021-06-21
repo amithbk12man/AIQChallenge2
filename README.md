@@ -1,23 +1,24 @@
 ## Problem Statement:
 
-Suppose we want to show a map to visualize the annual net generation of power plants of the US.
+Attached is a csv file which contains image data referenced by the column depth. The rest of columns
+(200) represent image pixel values from 0 to 255 at each depth.
 The challenge consists of the following requirements:
-· We want to display the top N plants.
-· On the map we want to show absolute value and percentage of the plant's federal state.
-· We want to be able to filter by state so we can zoom in.
-· The data usually comes as excel file - https://www.epa.gov/energy/emissions-generation-resourceintegrated-
-database-egrid (eGRID2016 Data File)
-· Built JUST a python backend that backs this map with a REST API.
+· The image size is relatively big. Hence, there is a need to resize the image width to 150 instead of
+200.
+· The resized image has to be stored in a database.
+· An API is required to request image frames based on depth_min and depth_max.
+· Apply a custom color map to the generated frames.
+· The solution should be based on Python.
 · Bonus: deployment of the solution in a cloud service.
 
 
 
-## Plant State level Power for Map Service
+## Image Service
 
-Current implementation is a basic approch to solve problem statment. This will provide one API to fetch top N power plant on the basis of number of generators they have. It also give option to add filter on the basis of state. Response of this API can be presented over map.
-Following technologies has been used to develop it.
+Current implementation is a basic approch to solve problem statment. This will provide an API to resize and get the image in given frame size.
+Frame size is determined by
 
- - Python 3.8(flask, pandas, pandasql)
+ - Python 3.8(flask, pandas, OpenCV, Pillow)
  - Docker
  - Docker Compose
 
@@ -43,36 +44,12 @@ Requirements:
 
 ### Test APIs
 ```bash
-//Fetch Plants
-
-Fetch top 10 plants:
-curl -X GET http://0.0.0.0:9080/topN?size=10
-
-Fetch top 10 plants with filter on state
-curl -X GET http://0.0.0.0:9080/topN?size=10&state=CA
+//Fetch image dataframe
+curl -X GET http://0.0.0.0:9090/getFrame?depth_min=1&depth_max=5000&cmap=gray
 
 Sample Response:
-HTTP Code: 200
-[
-  {
-    "actual_value": "9942",
-    "aggregate_value_per_state": 197323836.96400014,
-    "percentage": 0.0050384181419570835,
-    "plant_lat": 38.2494,
-    "plant_long": -122.0394,
-    "plant_name": "Solano County Cogen Plant",
-    "state": "CA"
-  },
-  {
-    "actual_value": "9911",
-    "aggregate_value_per_state": 197323836.96400014,
-    "percentage": 0.005022707926467175,
-    "plant_lat": 33.9716,
-    "plant_long": -118.0481,
-    "plant_name": "Whittier LFG Power Plant #1",
-    "state": "CA"
-  },...
-  ]
+![image](https://user-images.githubusercontent.com/10739723/122793278-0ee54580-d2cc-11eb-8e98-2b8bc5f30739.png)
+
 ```
 
 ### Features which could have been done:
