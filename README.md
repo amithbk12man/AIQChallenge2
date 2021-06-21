@@ -22,10 +22,6 @@ Frame size is determined by
  - Docker
  - Docker Compose
 
-## Assumptions:
-1. We are considering top plants on basis of net generation of power plants they have
-2. Federal State percentage for plant is calculated on basis of net generation of power plants for that state
-
 ### Run Applications
 
 ```bash
