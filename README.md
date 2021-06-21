@@ -53,7 +53,7 @@ Sample Response:
 ```
 
 ### Features which could have been done:
-- An UI with Map 
+- A database or Block store could be used or mounted in docker rather than local file system. 
 - Need to add proper error handling
 - Need to add proper logs mechanism
 - Need to add the unit and integration testings
