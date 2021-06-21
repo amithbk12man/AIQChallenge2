@@ -1,0 +1,9 @@
+version: '3'
+services:
+  python-image-service:
+    container_name: challenge2
+    build: .
+    environment:
+      PORT: 9090
+    ports:
+      - 9090:9090
