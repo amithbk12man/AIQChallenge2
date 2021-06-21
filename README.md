@@ -58,5 +58,4 @@ Sample Response:
 - Need to add proper logs mechanism
 - Need to add the unit and integration testings
 - Need to add automatic checks for enforcing code quality
-- Need to add  authorization like JWT/OAuth to APIs
 - Need to add CI/CD plugin for automatic deployment through docker
